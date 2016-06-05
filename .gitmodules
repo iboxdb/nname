@@ -1,3 +1,6 @@
 [submodule "Tools/dnlib"]
 	path = Tools/dnlib
 	url = https://github.com/0xd4d/dnlib.git
+[submodule "Tools/cecil"]
+	path = Tools/cecil
+	url = https://github.com/jbevain/cecil.git
