@@ -20,8 +20,10 @@ namespace nname
         private void Apply(ModuleDefMD module, TypeDef type)
         {
             var ispub = RType.IsPublic(type);
+
             foreach (var m in type.Fields)
             {
+                if (m.Name.Contains("__")) { continue; }
                 if (m.IsPrivate || (m.IsAssembly && (!m.IsFamily)) || (!ispub))
                 {
                     fcount++;

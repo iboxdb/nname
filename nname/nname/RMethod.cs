@@ -21,7 +21,6 @@ namespace nname
         {
             var baseNames = Helper.GetBaseNames(type);
 
-
             foreach (var m in type.Methods)
             {
                 if (!IsSpecialName(m, baseNames))

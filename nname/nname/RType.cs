@@ -8,7 +8,7 @@ namespace nname
 {
     class RType
     {
-        string ns = "iBoxDB.ByteCodes";
+        internal static string rnamespace = "";
 
 
         public void Apply(ModuleDefMD module)
@@ -19,11 +19,19 @@ namespace nname
                 {
                     if (type.Namespace.Length > 1)
                     {
-                        type.Namespace = ns;
+                        type.Namespace = rnamespace;
                     }
                     type.Name = GetClassName(type);
                 }
+                if (type.Name.Equals("iBoxDBVersion"))
+                {
+                    FieldDef field1 = new FieldDefUser("Ver_" + Math.Abs(DateTime.Now.Ticks).ToString(),
+                                    new FieldSig(module.CorLibTypes.Int32),
+                                    FieldAttributes.Public | FieldAttributes.Static);
+                    type.Fields.Add(field1);
+                }
             }
+
         }
 
         internal static bool IsPublic(TypeDef type)

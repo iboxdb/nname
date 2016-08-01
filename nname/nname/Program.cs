@@ -16,8 +16,12 @@ namespace nname
 
             var pathfix = Path.Combine(Path.GetDirectoryName(path), "Fixed");
             Directory.CreateDirectory(pathfix);
-            pathfix = Path.Combine(pathfix, Path.GetFileName(path));
+            var fileName = Path.GetFileName(path);
+            pathfix = Path.Combine(pathfix, fileName);
             File.Delete(pathfix);
+
+            RType.rnamespace = fileName.Substring(0, fileName.IndexOf('.')) + ".ByteCodes";
+
 
             ModuleDefMD module = ModuleDefMD.Load(path);
             Console.WriteLine(module.Assembly);
@@ -32,11 +36,15 @@ namespace nname
             module.Context.AssemblyResolver.AddToCache(module);
 
 
+            RInstructions rinstructions = new RInstructions(module);
+
+            new RField().Apply(module);
             new RProperty().Apply(module);
             new RMethod().Apply(module);
-            new RField().Apply(module);
+
             new RType().Apply(module);
 
+            rinstructions.Apply();
 
             module.Write(pathfix);
             module.Dispose();

@@ -15,10 +15,7 @@ namespace nname
 
         public static HashSet<String> GetBaseNames(TypeDef tdef)
         {
-            if (tdef.Name.Contains("BoxAction"))
-            {
-                WriteLine(tdef.ToString());
-            }
+
             var list = GetBaseTypes(tdef);
             //var hs = list.ToHashSet(tdef.DefinitionAssembly);
 
