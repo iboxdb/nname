@@ -20,7 +20,7 @@ namespace nname
         private void Apply(ModuleDefMD module, TypeDef type)
         {
             var baseNames = Helper.GetBaseNames(type);
-
+            var ispub = RType.IsPublic(type);
             foreach (var m in type.Methods)
             {
                 if (!IsSpecialName(m, baseNames))
@@ -28,6 +28,15 @@ namespace nname
                     var nn = GetMethodyName(m);
                     Helper.WriteLine(type.Name + "." + m.Name + " -> " + nn);
                     m.Name = nn;
+                    int pc = 1;
+                    foreach (var p in m.ParamDefs)
+                    {
+                        p.Name = "p" + pc;
+                        pc++;
+                    }
+                }
+                if (m.IsConstructor && ((!ispub) || m.IsPrivate || (m.IsAssembly && (!m.IsFamily))))
+                {
                     int pc = 1;
                     foreach (var p in m.ParamDefs)
                     {
