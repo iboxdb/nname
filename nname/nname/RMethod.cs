@@ -56,7 +56,7 @@ namespace nname
         private static bool IsSpecialName(MethodDef m, HashSet<string> pubNames)
         {
             var pn = m.Name;
-            bool isPN = m.IsSpecialName || m.IsRuntimeSpecialName ||
+            bool isPN = m.IsRuntimeSpecialName ||  //m.IsSpecialName ||
                 pn.Contains(".") ||
                 pn.Contains("_Item") || pn.Contains("Invoke") ||
                 pubNames.Contains(pn);

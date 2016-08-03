@@ -24,6 +24,7 @@ namespace nname
             foreach (var m in type.Fields)
             {
                 if (m.Name.Contains("__")) { continue; }
+                if (m.IsRuntimeSpecialName) { continue; }
                 if (m.IsPrivate || (m.IsAssembly && (!m.IsFamily)) || (!ispub))
                 {
                     fcount++;
