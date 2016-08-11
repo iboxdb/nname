@@ -62,7 +62,11 @@ namespace nname
                 f.Dispose();
                 ms.Position = 0;
                 ModuleDefinition cmodule = ModuleDefinition.ReadModule(ms);
-                cmodule.Write(File.Create(pathfix));
+
+                using (var tf = File.Create(pathfix))
+                {
+                    cmodule.Write(tf);
+                }
                 Helper.WriteLine(path + " -> " + pathfix);
             }
             finally
