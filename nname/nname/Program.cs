@@ -20,7 +20,6 @@ namespace nname
                 }
                 var path = args[0];
 
-
                 var pathfix = Path.Combine(Path.GetDirectoryName(path), "Fixed");
                 Directory.CreateDirectory(pathfix);
                 var fileName = Path.GetFileName(path);

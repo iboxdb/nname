@@ -38,7 +38,16 @@ namespace nname
                             }
                             else if (mr.IsMethodRef)
                             {
-                                m2d.Add(new RefToDef<MemberRef, MethodDef> { Ref = mr, Def = mr.ResolveMethod() });
+                                var r2f = new RefToDef<MemberRef, MethodDef> { Ref = mr, Def = mr.ResolveMethod() };
+
+                                if (r2f.Def == null)
+                                {
+                                    Helper.WriteLine("NoDEF: " + r2f.Ref.FullName);
+                                }
+                                else
+                                {
+                                    m2d.Add(r2f);
+                                }
                             }
                         }
                         if (mi != null && mi.Operand is MethodSpec)
@@ -59,6 +68,7 @@ namespace nname
             }
             foreach (var e in m2d)
             {
+                //if (e.Def == null) { Helper.WriteLine("NoDEF: " + e.Ref.FullName); continue; }
                 e.Ref.Name = e.Def.Name;
             }
             foreach (var e in m2d2)
