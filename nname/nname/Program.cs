@@ -62,6 +62,7 @@ namespace nname
                 ms.Position = 0;
                 ModuleDefinition cmodule = ModuleDefinition.ReadModule(ms);
 
+                File.Delete(pathfix);
                 using (var tf = File.Create(pathfix))
                 {
                     cmodule.Write(tf);
