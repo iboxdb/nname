@@ -32,18 +32,18 @@ namespace nname
                 ModuleDefMD module = ModuleDefMD.Load(path);
                 Console.WriteLine(module.Assembly);
 
-
+                
                 AssemblyResolver asmResolver = new AssemblyResolver();
                 ModuleContext modCtx = new ModuleContext(asmResolver);
                 asmResolver.DefaultModuleContext = modCtx;
                 asmResolver.EnableTypeDefCache = true;
 
                 module.Context = modCtx;
-                module.Context.AssemblyResolver.AddToCache(module);
+                ((AssemblyResolver)module.Context.AssemblyResolver).AddToCache(module);
 
 
                 RInstructions rinstructions = new RInstructions(module);
-
+                
                 new RField().Apply(module);
                 new RProperty().Apply(module);
                 new RMethod().Apply(module);
