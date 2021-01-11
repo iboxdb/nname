@@ -2,3 +2,7 @@ nname/nname/bin/*
 nname/nname/obj/*
 nname/.vs/*
 *.db
+
+nname/packages/*
+
+

@@ -26,13 +26,15 @@ namespace nname
                 pathfix = Path.Combine(pathfix, fileName);
                 File.Delete(pathfix);
 
-                RType.rnamespace = fileName.Substring(0, fileName.IndexOf('.')) + ".ByteCodes";
+                char[] cs = (fileName.Substring(0, fileName.IndexOf('.')) + ".ByteCodes").ToCharArray();
+                cs[0] = Char.ToUpper(cs[0]);
+                RType.rnamespace = new String(cs);
 
 
                 ModuleDefMD module = ModuleDefMD.Load(path);
                 Console.WriteLine(module.Assembly);
 
-                
+
                 AssemblyResolver asmResolver = new AssemblyResolver();
                 ModuleContext modCtx = new ModuleContext(asmResolver);
                 asmResolver.DefaultModuleContext = modCtx;
@@ -43,7 +45,7 @@ namespace nname
 
 
                 RInstructions rinstructions = new RInstructions(module);
-                
+
                 new RField().Apply(module);
                 new RProperty().Apply(module);
                 new RMethod().Apply(module);
