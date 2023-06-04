@@ -26,7 +26,7 @@ namespace nname
                 pathfix = Path.Combine(pathfix, fileName);
                 File.Delete(pathfix);
 
-                char[] cs = (fileName.Substring(0, fileName.IndexOf('.')) + ".ByteCodes").ToCharArray();
+                char[] cs = (fileName.Substring(0, fileName.IndexOf('.')) + ".Bytes").ToCharArray();
                 cs[0] = Char.ToUpper(cs[0]);
                 RType.rnamespace = new String(cs);
 
@@ -53,6 +53,8 @@ namespace nname
                 new RType().Apply(module);
 
                 rinstructions.Apply();
+
+                new REntryPoint.Apply(module);
 
                 module.Write(pathfix);
                 module.Dispose();
